@@ -11,10 +11,11 @@ mongoose.connect(process.env.DB_URL, {
 
 const db = mongoose.connection
 db.once('open', () => console.log('We are connected to database'))
-db.on('error', (error) => console.error(error))
+//db.on('error', (error) => console.error(error))
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(methodOverride('_method'))
+app.use(express.static('views/articles'))
 
 app.get('/', async (req, res) => {
   const articles = await Article.find().sort({ createdAt: 'desc' })

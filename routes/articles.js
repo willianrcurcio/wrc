@@ -11,11 +11,11 @@ router.get('/edit/:id', async (req, res) => {
   res.render('articles/edit', { article: article })
 })
 
-router.get('/:slug', async (req, res) => {
-  const article = await Article.findOne({ slug: req.params.slug })
-  if (article == null) res.redirect('/')
-  res.render('articles/show', { article: article })
-})
+//router.get('/:slug', async (req, res) => {
+//  const article = await Article.findOne({ slug: req.params.slug })
+//  if (article == null) res.redirect('/')
+//  res.render('articles/show', { article: article })
+//})
 
 router.post('/', async (req, res, next) => {
   req.article = new Article()
@@ -40,7 +40,7 @@ function saveArticleAndRedirect(path) {
     article.markdown = req.body.markdown
     try {
       article = await article.save()
-      res.redirect(`/articles/${article.slug}`)
+      res.redirect(`/`)
     } catch (e) {
       res.render(`articles/${path}`, { article: article })
     }
